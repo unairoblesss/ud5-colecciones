@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Main {
@@ -42,26 +41,32 @@ public class Main {
                 System.out.println(" Horas Semanales: ");
                 int HorasSemanales = Integer.parseInt(br.readLine());
 
-                Asignatura o = new Asignatura(nombre1, HorasSemanales);
-                asignaturas.add(o);
+                asignaturas.add(new Asignatura(nombre1, HorasSemanales));
                 break;
             case 3:
-                System.out.println(" Selecciona una asignatura ");
-            for (int i = 0;i < asignaturas.size();i++){
-                System.out.println(i+" "+asignaturas.get(i).getNombre1());
-            }
-                System.out.println(" Elige la asignatura ");
-                String  seleccion = br.readLine();
-                System.out.println(" Selecciona un alumno ");
-                for (int i = 0;i < alumnos.size();i++){
-                    System.out.println(i+" "+alumnos.get(i).getNombre());
-                }
-                System.out.println(" Elige el nombre ");
-                String  seleccion2 = br.readLine();
+                Alumno alumnoEncontrado = buscarAlumno(alumnos, br);
+                Asignatura asignaturaEncontrado = buscarAsignatura(asignaturas, br);
+
+                asignaturaEncontrado.getAlumnos().add(alumnoEncontrado);
+                alumnoEncontrado.getAsignaturas().add(asignaturaEncontrado);
+
                 break;
             case 4:
+
+                asignaturaEncontrado = buscarAsignatura(asignaturas, br);
+                asignaturaEncontrado.getAlumnos().forEach(al -> {
+                    System.out.println(al);
+                });
+
                 break;
             case 5:
+
+                alumnoEncontrado = buscarAlumno(alumnos, br);
+                alumnoEncontrado.getAsignaturas().forEach(asig -> {
+                    System.out.println(asig);
+                });
+
+
                 break;
             case 6:
                 break;
@@ -69,7 +74,45 @@ public class Main {
                     System.out.println(" ERROR ESCRIBE UNA OPCION VALIDA ");
                     break;
                 }
-        }while (opcion != 5);
+        }while (opcion != 6);
     }
+
+    private static Alumno buscarAlumno(List<Alumno> alumnos, BufferedReader br) throws IOException {
+        System.out.println(" Alumnos ");
+        for (Alumno aluTemp : alumnos){
+        System.out.println(aluTemp);}
+        System.out.println("Alumno a matricular: ");
+        String nombreAlumno = br.readLine();
+        int i = 0;
+        while(i<alumnos.size()&&
+                !nombreAlumno.equalsIgnoreCase(alumnos.get(i).getNombre())
+                ){
+            i++;
+        }
+        Alumno alumnoEncontrado = null;
+        if (i<alumnos.size()){
+            alumnoEncontrado = alumnos.get(i);
+        }
+        return alumnoEncontrado;
     }
+
+    private static Asignatura buscarAsignatura(List<Asignatura> asignaturas, BufferedReader br) throws IOException {
+        System.out.println(" Asignaturas ");
+        for (Asignatura asiTemp : asignaturas){
+            System.out.println(asiTemp);}
+        System.out.println("Asignatura en la que matricular ");
+        String nombreAsignatura = br.readLine();
+        int j = 0;
+        while(j<asignaturas.size()&&
+                !nombreAsignatura.equalsIgnoreCase(asignaturas.get(j).getNombre1())
+                ){
+            j++;
+        }
+        Asignatura asignaturaEncontrado = null;
+        if (j<asignaturas.size()){
+            asignaturaEncontrado = asignaturas.get(j);
+        }
+        return asignaturaEncontrado;
+    }
+}
 
