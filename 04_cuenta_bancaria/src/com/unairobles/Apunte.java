@@ -20,7 +20,7 @@ public class Apunte {
         return fecha;
     }
 
-    public Apunte(String cantidad, int fecha) {
+    public Apunte(double cantidad, String fecha) {
         this.cantidad = cantidad;
         this.fecha = fecha;
     }
@@ -41,4 +41,5 @@ public class Apunte {
     public List<CuentaBancaria> getCuentaBancarias() {
         return cuentaBancarias;
     }
+
 }

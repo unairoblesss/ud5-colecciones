@@ -11,6 +11,18 @@ public class CuentaBancaria {
         return codigoCuenta;
     }
 
+    public double calcularSaldo(){return 0.0;}
+
+    public void setApuntes(List<Apunte> apuntes) {
+        this.apuntes = apuntes;
+    }
+
+    public void nuevoApunte(double cantidad) {
+        Apunte a = new Apunte(cantidad, "hoy");
+        apuntes.add(a);
+        a.setCuentaBancaria();
+    }
+
     @Override
     public String toString() {
         return "CuentaBancaria{" +

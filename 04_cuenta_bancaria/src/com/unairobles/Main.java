@@ -1,8 +1,5 @@
 package com.unairobles;
 
-import com.sun.org.apache.bcel.internal.generic.BREAKPOINT;
-
-import javax.jws.soap.SOAPBinding;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,11 +13,11 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         List<Titular> titulars = new ArrayList<>();
         List<CuentaBancaria> cuentaBancarias = new ArrayList<>();
-        List<Apunte> apuntes = new ArrayList<>();
+
         int opcion;
         do {
             System.out.println(" ELIGE OPCION ");
-            System.out.println(" 1 - TITULAT ");
+            System.out.println(" 1 - TITULAR ");
             System.out.println(" 2 - CUENTA BANCARIA ");
             System.out.println(" 3 - CONSULTAS ");
             System.out.println(" 4 - SALIR ");
@@ -39,7 +36,7 @@ public class Main {
                     System.out.println(" Cuenta Asociada ");
                     String codCuenta = br.readLine();
                     //FALTA VINCULAR EL TITULAR A UN NUMERO DE CUENTA//
-                    Titular t = new Titular(nombre,apellidos,dni,fechaAlta);
+                    Titular t = new Titular(nombre, apellidos, dni, fechaAlta);
                     titulars.add(t);
                     break;
                 case 2:
@@ -59,18 +56,24 @@ public class Main {
                             cuentaBancarias.add(c);
                             break;
                         case 2:
+                            int i = 0;
+                            for (CuentaBancaria c : cuentaBancarias){
+                            System.out.println(i+""+c);
+                        i++;
+                            }
+                            System.out.println(" Cuenta en la que apuntar ");
+                            int codigoCuenta = Integer.parseInt(br.readLine());
                             System.out.println(" Escribe fecha ");
                             String fecha = br.readLine();
                             System.out.println(" Escribe cantidad ");
-                            int cantidad = Integer.parseInt(br.readLine());
-                            System.out.println(" Cuenta en la que apuntar ");
-                            codigoCuenta = br.readLine();
+                            double cantidad = Double.parseDouble(br.readLine());
+
                             //FALTA VINCULAR APUNTE A CUENTA BANCARIA//
-                            Apunte a = new Apunte(fecha,cantidad);
-                            apuntes.add(a);
+                            Apunte a = new Apunte(fecha, cantidad);
+
                             break;
                         case 3:
-
+                            //BORRAR CUENTA//
                             break;
                         default:
                             System.out.println(" ERROR ESCRIBE UNA OPCION VALIDA ");
