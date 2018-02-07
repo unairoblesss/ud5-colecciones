@@ -3,7 +3,9 @@ package com.unairobles;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Main {
@@ -14,7 +16,6 @@ public class Main {
 
         Set<Persona> Personas = new HashSet<>();
         Set<Persona> masPersonas = new HashSet<>();
-
 
         int i = 0;
         do {
@@ -40,12 +41,35 @@ public class Main {
         }
         while (i < 11);
         //  hasta aqui pides usuarios al usuario valga la rebundancia xD//
+        // Habria que ver si lo has hecho bien jajajajajaja//
         //Te faltan otros 4 puntos//
+        //Punto 1: Crear un grupo con todos los elementos sin duplicados  //
+        Set<Persona> copia = new HashSet<>(Personas);
+        copia.addAll(masPersonas);
 
+        for (Persona b : copia) {
+            System.out.println(b);
+        }
+        //Punto 2: Crear un grupo con todos los elementos y duplicados //
+        List<Persona> copia2 = new ArrayList<>(Personas);
+        copia2.addAll(masPersonas);
 
+        for (Persona b : copia2) {
+            System.out.println(b);
+        }
+        //Punto 3: Conjunto de personas que esten en Personas pero no en masPersonas //
+        Set<Persona> copia3 = new HashSet<>(Personas);
+        copia.removeAll(masPersonas);
 
-        //Punto 2: Con esto volcaria Personas en MasPersonas falta visualizarlo en pantalla//
-        Set<Persona> Resultado = new HashSet<>(Personas);
-        Resultado.addAll(masPersonas);
+        for (Persona b : copia3) {
+            System.out.println(b);
+        }
+        //Punto 4: Personas de los dos grupos //
+        Set<Persona> copia4 = new HashSet<>(Personas);
+        copia.retainAll(masPersonas);
+
+        for (Persona b : copia4) {
+            System.out.println(b);
+        }
     }
 }
